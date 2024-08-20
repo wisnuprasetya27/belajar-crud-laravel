@@ -16,7 +16,7 @@
         <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
             <div>
                 <div class="flex justify-center">
-                    <img src="{{ showImage('img/err404.png') }}" alt="404" style="width: 150px;">
+                    <img src="{!! asset('template') !!}/dist/img//err404.png" alt="404" style="width: 150px;">
                 </div>
                 <br>
                 <b style="background-color: red; color: white;">Sorry, we can't find the data</b>

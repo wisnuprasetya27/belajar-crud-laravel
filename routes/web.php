@@ -25,15 +25,13 @@ Route::get('/logout', 'LoginController@logout_proses')->middleware();
 Route::get('/dashboard', 'MainController@index')->middleware('role:all');
 
 #==
-Route::get('/user', 'AdminController@index')->middleware('role:all');
-Route::get('/modal/user/tambah', 'AdminController@modal_tambah')->middleware('role:ad');
-Route::post('/user/tambah', 'AdminController@tambah_proses')->middleware('role:ad');
+Route::get('/user/{role}', 'UserController@index')->middleware('role:all');
+Route::get('/modal/user/tambah/{role}', 'UserController@modal_tambah')->middleware('role:admin');
+Route::post('/user/tambah/{role}', 'UserController@tambah_proses')->middleware('role:admin');
 
-Route::get('/modal/user/reset-password/{id}', 'AdminController@modal_reset_password')->middleware('role:ad');
-Route::post('/user/reset-password', 'AdminController@reset_password_proses')->middleware('role:ad');
+Route::get('/modal/user/edit/{id}', 'UserController@modal_edit')->middleware('role:admin');
+Route::post('/user/edit', 'UserController@edit_proses')->middleware('role:admin');
 
-Route::get('/modal/user/edit/{id}', 'AdminController@modal_edit')->middleware('role:ad');
-Route::post('/user/edit', 'AdminController@edit_proses')->middleware('role:ad');
+Route::post('/user/reset-password', 'UserController@reset_password_proses')->middleware('role:admin');
 
-Route::get('/modal/user/hapus/{id}', 'AdminController@modal_hapus')->middleware('role:ad');
-Route::post('/user/hapus', 'AdminController@hapus_proses')->middleware('role:ad');
+Route::post('/user/hapus', 'UserController@hapus_proses')->middleware('role:admin');

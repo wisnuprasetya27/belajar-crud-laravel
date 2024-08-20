@@ -32,9 +32,9 @@
   {{-- has = untuk cek apakah ada session atau tidak --}}
   {{-- get = untuk mendapatkan value session --}}
   <div class="content-wrapper">
-    @if(Session::has('status'))
-      <div id="flash_alert" class="alert alert-{{ Session::get('status') }} mt-3 flat" role="alert" style="border-radius: 0px">
-        {{ Session::get('message') }}
+    @if(Session::has('alert-status'))
+      <div id="flash_alert" class="alert alert-{{ Session::get('alert-status') }} mt-3 flat" role="alert" style="border-radius: 0px">
+        {{ Session::get('alert-message') }}
       </div>
       <script>
         $(function (){

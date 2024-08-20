@@ -16,7 +16,7 @@
           <h5 class="text-gray">Loading...</h5>
           <br>
           <hr>
-          <button type="button" class="btn btn-secondary btn-lg" id="btn_tutup_modal_show" data-bs-dismiss="modal">Tutup</button>
+          <button type="button" class="btn btn-secondary btn-lg" id="btn_tutup_modal_show" data-dismiss="modal">Tutup</button>
           <br>
           <br>
         </center>

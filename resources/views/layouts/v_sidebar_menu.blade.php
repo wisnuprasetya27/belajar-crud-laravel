@@ -13,19 +13,19 @@ $sg3 = Request::segment(3,1);
 			</a>
 		</li>
 		<li class="nav-item">
-			<a href="/admin" class="nav-link {{ $sg2 == 'admin' ? 'active' : '' }}">
+			<a href="/user/admin" class="nav-link {{ $sg2 == 'admin' ? 'active' : '' }}">
 				<i class="fas fa-users nav-icon"></i> 
 				<p>Admin</p>
 			</a>
 		</li>
 		<li class="nav-item">
-			<a href="/dosen" class="nav-link {{ $sg2 == 'dosen' ? 'active' : '' }}">
+			<a href="/user/dosen" class="nav-link {{ $sg2 == 'dosen' ? 'active' : '' }}">
 				<i class="fas fa-user-tie nav-icon"></i> 
 				<p>Dosen</p>
 			</a>
 		</li>
 		<li class="nav-item">
-			<a href="/mahasiswa" class="nav-link {{ $sg2 == 'mahasiswa' ? 'active' : '' }}">
+			<a href="/user/mahasiswa" class="nav-link {{ $sg2 == 'mahasiswa' ? 'active' : '' }}">
 				<i class="fas fa-user-graduate nav-icon"></i> 
 				<p>Mahasiswa</p>
 			</a>

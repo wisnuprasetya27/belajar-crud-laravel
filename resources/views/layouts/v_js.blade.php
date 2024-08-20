@@ -39,3 +39,40 @@
 <script src="{!! asset('template') !!}/dist/js/adminlte.js"></script>
 <!-- sweetalert -->
 <script src="{!! asset('template') !!}/plugins/sweetalert/sweetalert.min.js"></script>
+<script>
+  $(function () {
+    $('.datatables-1').DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": false,
+        "info": true,
+        "autoWidth": false,
+        "responsive": false,
+        "pageLength": 10
+    });
+  });
+
+  function load_modal(url)
+	{
+		$('#mdBd').hide();
+		$('#mdLd').show();
+		$('#modalShow').modal({
+			backdrop: 'static',
+			keyboard: false
+		});
+		$('#modalShow').modal('show');
+		
+		$('#mdBd').load('{{ url("modal") }}'+url, function( response, status, xhr ) {
+			if(status == 'success'){
+				setTimeout(function() { 
+					$('#mdBd').show();
+					$('#mdLd').hide();
+				}, 200);
+			}
+			else{
+				console.log(response);
+			}
+		});
+	}
+</script>
