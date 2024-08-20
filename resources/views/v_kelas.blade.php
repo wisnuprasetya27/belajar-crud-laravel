@@ -20,7 +20,6 @@
                 <thead>
                   <tr>
                     <th style="text-align: center;">NO</th>
-                    <th>KODE</th>
                     <th>MATA KULIAH</th>
                     <th>DOSEN PENGAMPU</th>
                     <th style="text-align: center;">AKSI</th>

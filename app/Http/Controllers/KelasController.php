@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kelas;
+use App\Models\MataKuliah;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,13 +22,15 @@ class KelasController extends Controller
     public function modal_tambah()
     {
         return view('v_kelas_modal', [
-            'modal' => 'tambah',
+            'modal'         => 'tambah',
+            'mata_kuliah'   => MataKuliah::all(),
+            'dosen'         => User::where('role', 'dosen')->get(),
         ]);
     }
 
     public function tambah_proses(Request $request)
     {
-        #==cek kode
+        #==cek
         $cek = Kelas::where([
             ['mata_kuliah_id', '=', $request->mata_kuliah_id],
             ['dosen_id', '=', $request->dosen_id],
@@ -61,8 +65,10 @@ class KelasController extends Controller
         }
         
         return view('v_kelas_modal', [
-            'modal' => 'edit',
-            'row'   => $data,
+            'modal'         => 'edit',
+            'row'           => $data,
+            'mata_kuliah'   => MataKuliah::all(),
+            'dosen'         => User::where('role', 'dosen')->get(),
         ]);
     }
 
@@ -70,7 +76,7 @@ class KelasController extends Controller
     {
         $id = $request->id;
 
-        #==cek kode
+        #==cek
         $cek = Kelas::where([
             ['mata_kuliah_id', '=', $request->mata_kuliah_id],
             ['dosen_id', '=', $request->dosen_id],
