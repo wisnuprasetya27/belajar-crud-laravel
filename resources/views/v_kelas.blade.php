@@ -30,11 +30,11 @@
                   @foreach ($data as $key => $row)
                     <tr>
                       <td align="center">{{ $loop->iteration }}.</td>
-                      <td>{{ $row->mata_kuliah_id }}</td>
-                      <td>{{ $row->dosen_id }}</td>
+                      <td>{{ $row->mata_kuliah->mata_kuliah }}</td>
+                      <td>{{ $row->dosen->nama }}</td>
                       <td>{{ $row->kelas }}</td>
                       <td align="center">
-                        <a href="/kelas/mahasiswa/{{ $row->id }}">
+                        <a href="/kelas-mahasiswa/{{ $row->id }}">
                           <button type="button" class="btn btn-sm mt-1 mr-1 btn-info"><i class="fas fa-chalkboard-teacher"></i> Mahasiswa Kelas</button>
                         </a>
                         @if (getAuth('role') == 'admin')

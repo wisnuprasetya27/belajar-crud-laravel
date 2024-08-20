@@ -12,7 +12,7 @@ class KelasController extends Controller
 {
     public function index()
     {
-        $data = Kelas::all();
+        $data = Kelas::with(['mata_kuliah', 'dosen'])->get();
 
         return view('v_kelas', [
             'data' => $data,

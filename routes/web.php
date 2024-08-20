@@ -56,8 +56,8 @@ Route::post('/kelas/edit', 'KelasController@edit_proses')->middleware('role:admi
 Route::get('/kelas/hapus/{id}', 'KelasController@hapus_proses')->middleware('role:admin');
 
 #==
-Route::get('/kelas-mahasiswa/{id}', 'KelasMahasiswaController@index')->middleware('role:all');
-Route::get('/modal/kelas-mahasiswa/tambah/{id}', 'KelasMahasiswaController@modal_tambah')->middleware('role:admin');
+Route::get('/kelas-mahasiswa/{kelas_id}', 'KelasMahasiswaController@index')->middleware('role:all');
+Route::get('/modal/kelas-mahasiswa/tambah/{kelas_id}', 'KelasMahasiswaController@modal_tambah')->middleware('role:admin');
 Route::post('/kelas-mahasiswa/tambah', 'KelasMahasiswaController@tambah_proses')->middleware('role:admin');
 
 Route::get('/modal/kelas-mahasiswa/edit/{id}', 'KelasMahasiswaController@modal_edit')->middleware('role:admin');

@@ -17,4 +17,14 @@ class Kelas extends Model
         'mata_kuliah_id',
         'kelas',
     ];
+
+    public function mata_kuliah()
+    {
+        return $this->belongsTo(MataKuliah::class, 'mata_kuliah_id', 'id');
+    }
+
+    public function dosen()
+    {
+        return $this->belongsTo(User::class, 'dosen_id', 'id');
+    }
 }
