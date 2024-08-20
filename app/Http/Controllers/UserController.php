@@ -35,18 +35,14 @@ class UserController extends Controller
         #==cek username
         $cek = User::where('username', $request->username)->first();
         if($cek != ''){
-            return json_encode([
-                'status'    => 'failed',
-                'pesan'     => 'Username telah terdaftar di database',
-            ], JSON_FORCE_OBJECT);
-            die;
+            \sesAlert('danger', 'Username telah terdaftar di database');
+            return \back();
         }
         
         $request['password'] = sha1(sha1($request['username']));
         $sql = User::create($request->all());
 
-        if($sql)
-        {
+        if($sql){
             \sesAlert('success', 'Tambah data berhasil');
         }
         else{
@@ -56,8 +52,11 @@ class UserController extends Controller
         return \back();
     }
 
-    public function modal_edit($id)
+    public function modal_edit(Request $request)
     {
+        $id     = $request->id;
+        $role   = $request->role;
+
         $data = User::where('id', $id)->first();
 
         if($data == null){
@@ -65,9 +64,10 @@ class UserController extends Controller
             die;
         }
         
-        return view('master_data/v_user_modal', [
+        return view('v_user_modal', [
             'modal' => 'edit',
             'row'   => $data,
+            'role'  => $role,
         ]);
     }
 
@@ -82,18 +82,14 @@ class UserController extends Controller
         ])->first();
 
         if($cek != null){
-            return json_encode([
-                'status'    => 'failed',
-                'pesan'     => 'Username telah terdaftar di databaseaa',
-            ], JSON_FORCE_OBJECT);
-            die;
+            \sesAlert('danger', 'Username telah terdaftar di database');
+            return \back();
         }
 
         $sql = User::find($id);
         $sql->update($request->all());
 
-        if($sql)
-        {
+        if($sql){
             \sesAlert('success', 'Edit data berhasil');
         }
         else{

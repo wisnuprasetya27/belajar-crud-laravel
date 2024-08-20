@@ -45,10 +45,8 @@
   </div>
   <form action="/user/edit" method="POST" class="form-inputdata" enctype="multipart/form-data">
     @csrf
-    <input type="hidden" name="role" value="{{ $role }}">
     <input type="hidden" name="id" value="{{ $row->id }}">
     <div class="modal-body">
-      @include('helpers.v_info_colum_require')
       <div class="card m-b-0">
         <div class="card-body">
           <div class="form-group">

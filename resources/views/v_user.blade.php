@@ -35,7 +35,7 @@
                       <td>{{ $row->username }}</td>
                       @if ($role == 'admin')
                         <td align="center">
-                          <button type="button" onclick="load_modal('/user/edit/{{ $row->id }}')" class="btn btn-sm mt-1 mr-1 btn-primary"><i class="fas fa-edit"></i> Edit</button>
+                          <button type="button" onclick="load_modal('/user/edit/{{ $row->id.'/'.$role }}')" class="btn btn-sm mt-1 mr-1 btn-primary"><i class="fas fa-edit"></i> Edit</button>
                           <a href="/user/reset-password/{{ $row->id }}" onclick="return confirm('Apakah anda yakin ingin mereset password dari: {{ $row->nama }}?')">
                             <button type="button" class="btn btn-sm mt-1 mr-1 btn-warning"><i class="fas fa-sync"></i> Reset Password</button>
                           </a>

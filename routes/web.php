@@ -29,7 +29,7 @@ Route::get('/user/{role}', 'UserController@index')->middleware('role:all');
 Route::get('/modal/user/tambah/{role}', 'UserController@modal_tambah')->middleware('role:admin');
 Route::post('/user/tambah/{role}', 'UserController@tambah_proses')->middleware('role:admin');
 
-Route::get('/modal/user/edit/{id}', 'UserController@modal_edit')->middleware('role:admin');
+Route::get('/modal/user/edit/{id}/{role}', 'UserController@modal_edit')->middleware('role:admin');
 Route::post('/user/edit', 'UserController@edit_proses')->middleware('role:admin');
 
 Route::post('/user/reset-password', 'UserController@reset_password_proses')->middleware('role:admin');
