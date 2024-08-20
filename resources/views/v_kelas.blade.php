@@ -13,8 +13,10 @@
       <div class="col-lg-12">
         <div class="card">
           <div class="card-body">
-            <a class="btn btn-primary" onclick="load_modal('/kelas/tambah')" href="#!"><i class="fas fa-plus"></i> Tambah</a>
-            <hr>
+            @if (getAuth('role') == 'admin')
+              <a class="btn btn-primary" onclick="load_modal('/kelas/tambah')" href="#!"><i class="fas fa-plus"></i> Tambah</a>
+              <hr>
+            @endif
             <div class="table-responsive">
               <table class="table table-sm table-striped table-bordered datatables-1">
                 <thead>

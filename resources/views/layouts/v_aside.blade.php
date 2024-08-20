@@ -7,6 +7,23 @@
 
 	<!-- Sidebar -->
 	<div class="sidebar">
+		<div class="user-panel mt-3 pb-3 mb-3 d-flex">
+			<div class="info">
+				<a href="#" class="d-block">{{ getAuth('nama') }}</a>
+				@php
+					if(getAuth('role') == 'admin'){
+						$cl = 'success';
+					}
+					else if(getAuth('role') == 'dosen'){
+						$cl = 'primary';
+					}
+					else{
+						$cl = 'warning';
+					}
+				@endphp
+				<small class="badge badge-{{ $cl }}"><i class="fas fa-user-circle"></i> {{ ucwords(getAuth('role')) }}</small>
+			</div>
+		</div>
 		@include('layouts.v_sidebar_menu')
 	</div>
 </aside>

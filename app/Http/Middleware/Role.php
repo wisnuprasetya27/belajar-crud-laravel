@@ -23,6 +23,9 @@ class Role
                 || ($role == 'dosen' && getAuth('role') == 'dosen')){
                     return $next($request);
                 }
+                else if ($role == 'admin_dosen' && (getAuth('role') == 'admin' || getAuth('role') == 'dosen')){
+                    return $next($request);
+                }
             }
 
             return redirect('/404');

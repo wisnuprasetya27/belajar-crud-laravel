@@ -32,6 +32,20 @@ class KelasMahasiswaController extends Controller
         ]);
     }
 
+    public function nilai_mahasiswa()
+    {
+        if (getAuth('role') != 'mahasiswa'){
+            return \redirect('/404');
+            die;
+        }
+
+        $data = KelasMahasiswa::with('kelas')->where([['kelas_mahasiswa.mahasiswa_id', '=', getAuth('id')]])->get();
+
+        return view('v_nilai_mahasiswa', [
+            'data' => $data,
+        ]);
+    }
+
     public function modal_tambah(Request $request)
     {
         $kelas_id = $request->kelas_id;

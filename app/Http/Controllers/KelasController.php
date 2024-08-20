@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kelas;
+use App\Models\KelasMahasiswa;
 use App\Models\MataKuliah;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -12,7 +13,19 @@ class KelasController extends Controller
 {
     public function index()
     {
-        $data = Kelas::with(['mata_kuliah', 'dosen'])->get();
+        if (getAuth('role') == 'admin'){
+            $where = ['dosen_id', '<>', 'ALL'];
+        }
+        else if (getAuth('role') == 'dosen'){
+            $where = ['dosen_id', '=', getAuth('id')];
+        }
+        else{
+
+            return \redirect('/kelas-mahasiswa-nilai');
+            die;
+        }
+
+        $data = Kelas::with(['mata_kuliah', 'dosen'])->where([$where])->get();
 
         return view('v_kelas', [
             'data' => $data,

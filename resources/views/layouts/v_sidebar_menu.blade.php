@@ -7,8 +7,8 @@ $sg3 = Request::segment(3,1);
 <nav class="mt-2">
 	<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 		<li class="nav-item">
-			<a href="/dashboard" class="nav-link">
-				<i class="fas fa-th-large nav-icon"></i> 
+			<a href="/dashboard" class="nav-link {{ $sg1 == 'dashboard' ? 'active' : '' }}">
+				<i class="fas fa-home nav-icon"></i> 
 				<p>Dashboard</p>
 			</a>
 		</li>
@@ -39,11 +39,22 @@ $sg3 = Request::segment(3,1);
 			</li>
 		@endif
 
-		<li class="nav-item">
-			<a href="/kelas" class="nav-link {{ ($sg1 == 'kelas' || $sg1 == 'kelas-mahasiswa') ? 'active' : '' }}">
-				<i class="fas fa-chalkboard-teacher nav-icon"></i> 
-				<p>Kelas</p>
-			</a>
-		</li>
+		@if (getAuth('role') == 'admin' || getAuth('role') == 'dosen')
+			<li class="nav-item">
+				<a href="/kelas" class="nav-link {{ ($sg1 == 'kelas' || $sg1 == 'kelas-mahasiswa') ? 'active' : '' }}">
+					<i class="fas fa-chalkboard-teacher nav-icon"></i> 
+					<p>Kelas</p>
+				</a>
+			</li>
+		@endif
+
+		@if (getAuth('role') == 'mahasiswa')
+			<li class="nav-item">
+				<a href="/kelas-nilai" class="nav-link {{ $sg1 == 'kelas-nilai' ? 'active' : '' }}">
+					<i class="fas fa-file-alt nav-icon"></i> 
+					<p>Nilai</p>
+				</a>
+			</li>
+		@endif
 	</ul>
 </nav>
