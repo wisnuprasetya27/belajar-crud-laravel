@@ -45,11 +45,5 @@ $sg3 = Request::segment(3,1);
 				<p>Kelas</p>
 			</a>
 		</li>
-		<li class="nav-item">
-			<a href="/nilai" class="nav-link {{ $sg1 == 'nilai' ? 'active' : '' }}">
-				<i class="fas fa-edit nav-icon"></i> 
-				<p>Nilai</p>
-			</a>
-		</li>
 	</ul>
 </nav>

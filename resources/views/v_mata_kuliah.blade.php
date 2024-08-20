@@ -36,7 +36,7 @@
                       @if (getAuth('role') == 'admin')
                         <td align="center">
                           <button type="button" onclick="load_modal('/mata-kuliah/edit/{{ $row->id }}')" class="btn btn-sm mt-1 mr-1 btn-primary"><i class="fas fa-edit"></i> Edit</button>
-                          <a href="/mata-kuliah/hapus/{{ $row->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data: {{ $row->nama }}?')">
+                          <a href="/mata-kuliah/hapus/{{ $row->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data: {{ $row->kode.' - '.$row->mata_kuliah }}?')">
                             <button type="button" class="btn btn-sm mt-1 mr-1 btn-danger"><i class="fas fa-trash"></i></button>
                           </a>
                           </td>
