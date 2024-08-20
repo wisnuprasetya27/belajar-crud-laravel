@@ -55,10 +55,19 @@
                   @foreach ($data as $key => $row)
                     <tr>
                       <td align="center">{{ $loop->iteration }}.</td>
-                      <td>{{ $row->mahasiswa_id }}</td>
-                      <td>{{ $row->mahasiswa_id }}</td>
+                      <td>{{ $row->mahasiswa->username }}</td>
+                      <td>{{ $row->mahasiswa->nama }}</td>
                       <td align="center">
-                        <input type="number" min="0" max="100" maxlength="3" class="form-control form-control-sm" value="{{ $row->nilai }}" placeholder="..." style="min-width: 100px;">
+                        <table>
+                          <tr style="background-color: transparent;">
+                            <td style="border: 0px;">
+                              <input type="number" min="0" max="100" maxlength="3" onchange="edit_nilai('{{ $row->id }}', this.value)" class="form-control form-control-sm input-disabled" value="{{ $row->nilai }}" placeholder="..." style="width: 100px;">
+                            </td>
+                            <td style="border: 0px;">
+                              <div id="alert-{{ $row->id }}"></div>
+                            </td>
+                          </tr>
+                        </table>
                       </td>
                       @if (getAuth('role') == 'admin')
                         <td align="center">
@@ -78,4 +87,28 @@
     </div>
   </div>
 </div>
+<script>
+  function edit_nilai(id, nilai) 
+  {
+    $('#input-disabled').prop('disabled', true);
+    $('#alert-'+id).html('<i class="fas fa-spinner fa-pulse"></i>');
+
+		$.ajax({
+			url: '{{ url("kelas-mahasiswa/edit-nilai") }}/'+id+'/'+nilai,
+			type: 'get',
+			success: function(data) {
+				if(data == 'success'){
+          $('#alert-'+id).html('<i class="fas fa-check-circle text-success"></i>');
+          $('#alert-'+id).show();
+        }
+        else{
+          alert(data);
+        }
+
+        $('#input-disabled').prop('disabled', false);
+        $('#alert-'+id).delay(2000).hide(500);
+			}
+		});
+	}
+</script>
 @endsection

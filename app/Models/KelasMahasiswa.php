@@ -17,4 +17,9 @@ class KelasMahasiswa extends Model
         'mahasiswa_id',
         'nilai',
     ];
+
+    public function mahasiswa()
+    {
+        return $this->belongsTo(User::class, 'mahasiswa_id', 'id');
+    }
 }

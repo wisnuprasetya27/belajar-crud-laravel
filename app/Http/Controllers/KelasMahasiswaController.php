@@ -12,7 +12,7 @@ class KelasMahasiswaController extends Controller
 {
     public function index(Request $request)
     {
-        $kelas_id   = $request->kelas_id;
+        $kelas_id = $request->kelas_id;
 
         #==cek
         $kelas = Kelas::with(['mata_kuliah', 'dosen'])
@@ -23,7 +23,7 @@ class KelasMahasiswaController extends Controller
             return \redirect('404');
         }
 
-        $data = KelasMahasiswa::all();
+        $data = KelasMahasiswa::with(['mahasiswa'])->where('kelas_id', $kelas_id)->get();
 
         return view('v_kelas_mahasiswa', [
             'data'      => $data,
@@ -47,7 +47,7 @@ class KelasMahasiswaController extends Controller
         #==cek
         $mahasiswa = User::where([
             ['username', '=', $request->nim],
-            ['role', '=', 'dosen']
+            ['role', '=', 'mahasiswa']
         ])->first();
 
         if($mahasiswa == ''){
@@ -80,12 +80,14 @@ class KelasMahasiswaController extends Controller
         return \back();
     }
 
-    public function edit_proses(Request $request)
+    public function edit_nilai_proses(Request $request)
     {
-        $id = $request->id;
+        $id     = $request->id;
+        $nilai  = $request->nilai;
 
-        $sql = KelasMahasiswa::find($id);
-        $sql->update($request->all());
+        $sql = DB::table('kelas_mahasiswa')
+        ->where('id', $id)
+        ->update(['nilai' => $nilai]);
 
         if($sql){
             echo 'success';
