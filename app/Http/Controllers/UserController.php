@@ -106,27 +106,22 @@ class UserController extends Controller
         ->where('id', $request->id)
         ->update(['password' => $request->new_password]);
 
-        return json_encode([
-            'status'    => 'success',
-            'pesan'     => 'Reset password user berhasil',
-        ], JSON_FORCE_OBJECT);
+        \sesAlert('success', 'Reset password berhasil');
+        return \back();
     }
 
     public function hapus_proses(Request $request)
     {
         if($request->id == \getAuth('id')){
-            return json_encode([
-                'status'    => 'failed',
-                'pesan'     => 'Anda tidak dapat menghapus akun anda sendiri!',
-            ], JSON_FORCE_OBJECT);
-            die;
+            \sesAlert('danger', 'Anda tidak dapat menghapus akun anda sendiri');
+            return \back();
         }
 
-        DB::table('users')->where('id', $request->id)->delete();
+        DB::table('users')
+        ->where('id', $request->id)
+        ->delete();
 
-        return json_encode([
-            'status'    => 'success',
-            'pesan'     => 'Hapus data berhasil',
-        ], JSON_FORCE_OBJECT);
+        \sesAlert('success', 'Hapus data berhasil');
+        return \back();
     }
 }
