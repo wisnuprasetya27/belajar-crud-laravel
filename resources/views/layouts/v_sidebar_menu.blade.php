@@ -40,9 +40,9 @@ $sg3 = Request::segment(3,1);
 		@endif
 
 		<li class="nav-item">
-			<a href="/kelas-mata-kuliah" class="nav-link {{ $sg1 == 'kelas-mata-kuliah' ? 'active' : '' }}">
-				<i class="fas fa-user-tie nav-icon"></i> 
-				<p>Kelas Mata Kuliah</p>
+			<a href="/kelas" class="nav-link {{ $sg1 == 'kelas' ? 'active' : '' }}">
+				<i class="fas fa-chalkboard-teacher nav-icon"></i> 
+				<p>Kelas</p>
 			</a>
 		</li>
 		<li class="nav-item">

@@ -8,23 +8,19 @@ use Illuminate\Support\Facades\DB;
 
 class MataKuliahController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $role = $request->role;
         $data = MataKuliah::all();
 
         return view('v_mata_kuliah', [
             'data'      => $data,
-            'role'      => $role,
         ]);
     }
 
-    public function modal_tambah(Request $request)
+    public function modal_tambah()
     {
-        $role = $request->role;
         return view('v_mata_kuliah_modal', [
             'modal' => 'tambah',
-            'role'  => $role,
         ]);
     }
 
@@ -51,9 +47,7 @@ class MataKuliahController extends Controller
 
     public function modal_edit(Request $request)
     {
-        $id     = $request->id;
-        $role   = $request->role;
-
+        $id   = $request->id;
         $data = MataKuliah::where('id', $id)->first();
 
         if($data == null){
@@ -64,7 +58,6 @@ class MataKuliahController extends Controller
         return view('v_mata_kuliah_modal', [
             'modal' => 'edit',
             'row'   => $data,
-            'role'  => $role,
         ]);
     }
 
@@ -79,7 +72,7 @@ class MataKuliahController extends Controller
         ])->first();
 
         if($cek != null){
-            \sesAlert('danger', 'kode telah terdaftar di database');
+            \sesAlert('danger', 'Kode telah terdaftar di database');
             return \back();
         }
 

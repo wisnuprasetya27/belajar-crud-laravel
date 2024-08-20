@@ -2,42 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MataKuliah;
+use App\Models\Kelas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class Kelas extends Controller
+class KelasController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $role = $request->role;
-        $data = MataKuliah::all();
+        $data = Kelas::all();
 
         return view('v_kelas', [
-            'data'      => $data,
-            'role'      => $role,
+            'data' => $data,
         ]);
     }
 
-    public function modal_tambah(Request $request)
+    public function modal_tambah()
     {
-        $role = $request->role;
         return view('v_kelas_modal', [
             'modal' => 'tambah',
-            'role'  => $role,
         ]);
     }
 
     public function tambah_proses(Request $request)
     {
         #==cek kode
-        $cek = MataKuliah::where('kode', $request->kode)->first();
+        $cek = Kelas::where([
+            ['mata_kuliah_id', '=', $request->mata_kuliah_id],
+            ['dosen_id', '=', $request->dosen_id],
+            ['kelas', '=', $request->kelas],
+        ])->first();
+
         if($cek != ''){
-            \sesAlert('danger', 'Kode telah terdaftar di database');
+            \sesAlert('danger', 'Kelas telah terdaftar di database');
             return \back();
         }
         
-        $sql = MataKuliah::create($request->all());
+        $sql = Kelas::create($request->all());
 
         if($sql){
             \sesAlert('success', 'Tambah data berhasil');
@@ -51,10 +52,8 @@ class Kelas extends Controller
 
     public function modal_edit(Request $request)
     {
-        $id     = $request->id;
-        $role   = $request->role;
-
-        $data = MataKuliah::where('id', $id)->first();
+        $id   = $request->id;
+        $data = Kelas::where('id', $id)->first();
 
         if($data == null){
             return view('modal/v_modal_404');
@@ -64,7 +63,6 @@ class Kelas extends Controller
         return view('v_kelas_modal', [
             'modal' => 'edit',
             'row'   => $data,
-            'role'  => $role,
         ]);
     }
 
@@ -73,17 +71,19 @@ class Kelas extends Controller
         $id = $request->id;
 
         #==cek kode
-        $cek = MataKuliah::where([
-            ['kode', '=', $request->kode],
+        $cek = Kelas::where([
+            ['mata_kuliah_id', '=', $request->mata_kuliah_id],
+            ['dosen_id', '=', $request->dosen_id],
+            ['kelas', '=', $request->kelas],
             ['id', '<>', $id],
         ])->first();
 
         if($cek != null){
-            \sesAlert('danger', 'kode telah terdaftar di database');
+            \sesAlert('danger', 'Kelas telah terdaftar di database');
             return \back();
         }
 
-        $sql = MataKuliah::find($id);
+        $sql = Kelas::find($id);
         $sql->update($request->all());
 
         if($sql){
@@ -100,6 +100,10 @@ class Kelas extends Controller
     {
         DB::table('kelas')
         ->where('id', $request->id)
+        ->delete();
+
+        DB::table('kelas_mahasiswa')
+        ->where('kelas_id', $request->id)
         ->delete();
 
         \sesAlert('success', 'Hapus data berhasil');

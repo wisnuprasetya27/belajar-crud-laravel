@@ -43,5 +43,14 @@ Route::post('/mata-kuliah/tambah', 'MataKuliahController@tambah_proses')->middle
 Route::get('/modal/mata-kuliah/edit/{id}', 'MataKuliahController@modal_edit')->middleware('role:admin');
 Route::post('/mata-kuliah/edit', 'MataKuliahController@edit_proses')->middleware('role:admin');
 
-Route::get('/mata-kuliah/reset-password/{id}/{new_password}', 'MataKuliahController@reset_password_proses')->middleware('role:admin');
 Route::get('/mata-kuliah/hapus/{id}', 'MataKuliahController@hapus_proses')->middleware('role:admin');
+
+#==
+Route::get('/kelas', 'KelasController@index')->middleware('role:all');
+Route::get('/modal/kelas/tambah', 'KelasController@modal_tambah')->middleware('role:admin');
+Route::post('/kelas/tambah', 'KelasController@tambah_proses')->middleware('role:admin');
+
+Route::get('/modal/kelas/edit/{id}', 'KelasController@modal_edit')->middleware('role:admin');
+Route::post('/kelas/edit', 'KelasController@edit_proses')->middleware('role:admin');
+
+Route::get('/kelas/hapus/{id}', 'KelasController@hapus_proses')->middleware('role:admin');
